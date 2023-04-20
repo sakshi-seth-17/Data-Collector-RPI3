@@ -1,6 +1,6 @@
                                                             # Data-Collector-RPI3
                                                             
-This application is built to store observations from the sensor like temperature, humidity, thermal, brightness, and images into firebase as well as the local database tables.
+This application is built using Python to store observations from the sensor like temperature, humidity, thermal, brightness, and images into firebase as well as the local database tables.
 
 ---
 
@@ -24,6 +24,7 @@ This application is built to store observations from the sensor like temperature
 ---
 
 ### Flow of the application:
+<img src="/path/to/img.jpg" alt="Alt text" title="Optional title">
 
 ### Instructions
 1. Clone this repository. \
