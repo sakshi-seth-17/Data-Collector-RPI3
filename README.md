@@ -42,7 +42,7 @@ This application is built to store observations from the sensor like temperature
 Paste below lines inside the file by making necessary changes \
 [Unit] \
 Description=rpi0 \
-After=multi-user.target \
+After=multi-user.target 
 
 
 [Service] \
@@ -58,7 +58,7 @@ Type=simple \
 
 
 [Install] \
-WantedBy=multi-user.target \
+WantedBy=multi-user.target 
 
 `sudo chmod 644 /lib/systemd/system/datacollector.service` \
 `sudo systemctl enable datacollector.service` \
