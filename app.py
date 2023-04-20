@@ -15,7 +15,7 @@ from PIL import Image
 import json
 import requests
 import base64
-
+import logging
 
 cred = credentials.Certificate("/home/wendy-king/DataCollector/db-key.json")
 firebase_admin.initialize_app(cred)
@@ -29,6 +29,8 @@ storageBucket = configData["storageBucket"]
 collectionName = configData["collection"]
 rpidescription = "wendy-king"
 
+logging.basicConfig(filename='/home/wendy-king/DataCollector/error.log', filemode='a', format='%(asctime)s - %(message)s', level=logging.INFO)
+logging.info(f"Error log for [{rpidescription}")
 
 '''
     Get IP address of the Raspberry Pi
@@ -50,10 +52,12 @@ def brightness(image):
     return brightness
     
 def storeOnWebserver(data):
-
+    
     # Convert the JSON object to a string
     data_str = json.dumps(data)
     
+
+    #print(type(data_str))
     # Send the JSON string to the API endpoint
     response = requests.post('http://aspendb.uga.edu/firebase/getdata', json=data_str)
 
@@ -74,20 +78,19 @@ def storeImage():
         camera.capture(name)
         storage.child("{}/{}".format(storageBucket,name)).put(name)
         brightness_value = brightness(name)
-        
+        #configData["brightness"][dt] = brightness_value
         configData["current_brightness"] = brightness_value
         flag = writeJson("/home/wendy-king/DataCollector/config.json",configData)
-        
         with open(name, "rb") as image_file:
             encoded_string = base64.b64encode(image_file.read())
         encoded_string = encoded_string.decode("utf-8")
         os.remove(name)
         camera.close()
         print("Image stored")
-        
         return name.replace(".jpg",""), encoded_string
     except Exception as err:
-        print("Error: ",err)
+        logging.error('storeImage: {}'.format(err))
+        #print("Error: ",err)
         return "",""
 
     
@@ -97,24 +100,22 @@ def storeImage():
     Store Humidity, Temperature, IP Address and Motion data in firebase database
 '''
     
-def storeKPI(docName,motion,encoded_string):
-    data = getparams()  #Humidity and Temperature   
+def storeSensorReadings(docName,motion,encoded_string):
+    data = getSensorReadings()  #Humidity and Temperature   
     location = ""
     try:
         doc_ref = db.collection("RPI-details")
         for doc in doc_ref.get():
-            print(rpidescription)
-            print(doc.id)
             if doc.id == rpidescription:
                 location = doc.to_dict()["location"]
                 break
-    except:
-        print("here")
+    except Exception as err:
+        logging.error('storeSensorReadings: {}'.format(err))
         location = ""
-        
     '''  if temperature is in abnormal range, check again and if still abnormal send an email '''
     if data["Temperature"] < 18 or  data["Temperature"] > 30: 
-        data = getparams()
+        data = getSensorReadings()
+        logging.info("Temperature {}".format(data["Temperature"]))
         if data["Temperature"] < 18 or  data["Temperature"] > 30: 
             sendStaus(rpidescription,location, raspberryIP(), data["Temperature"]) 
             
@@ -127,6 +128,8 @@ def storeKPI(docName,motion,encoded_string):
     data["rpi"] = "wendy_king"
     data["image"] = encoded_string
     data["location"]= location
+    #storeOnWebserver(data)
+    #print(data["brightness"])
     
     try:
         storeOnWebserver(data)
@@ -134,12 +137,21 @@ def storeKPI(docName,motion,encoded_string):
         doc_ref.set(data)
         print("KPI stored")
     except Exception as err:
+        logging.error('storeSensorReadings: {}'.format(err))
         print("Error: ",err)
+        
+    
+
+
 
 motion = 0
 while True:
-    docName,encoded_string = storeImage()
-    storeKPI(docName.replace(path,""),motion,encoded_string)
-    #time.sleep(20)
-    time.sleep(1800)
+    try:
+        docName,encoded_string = storeImage()
+        storeSensorReadings(docName.replace(path,""),motion,encoded_string)
+        #time.sleep(20)
+        time.sleep(1800)
+    except Exception as err:
+        logging.error('{}'.format(err))
+        pass
 
