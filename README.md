@@ -54,7 +54,7 @@ Restart=on-failure \
 KillMode=process \
 LimitMEMLOCK=infinity \
 LimitNOFILE=65535 \
-Type=simple \
+Type=simple 
 
 
 [Install] \
