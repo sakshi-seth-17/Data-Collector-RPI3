@@ -1,10 +1,6 @@
                                                             # Data-Collector-RPI3
                                                             
-1.	Flow of the application:
-            ![alt text]([http://url/to/img.png](https://github.com/sakshi-seth-17/Data-Collector-RPI3/blob/main/RPI3.jpg?raw=true))
-
-2.	Location details of the components:
-      •	Application code path on respective RPI server: Whenever you start working on a fresh RPI, you need to 'ifconfig' into the server to get the IP Address 
-•	Current RPI details need to be added here
-•	Centralized Local database (on webserver - webserver@128.192.158.63) path: /var/www/aspendb/probesearch/SensorsData
-•	Firebase collection needs to be created.
+### Necessary configuration to be set on the RPI before starting to use it
+- Issue the command ifconfig on cmd to get the IP address of the RPI
+- To SSH into the RPI enable the SSH config: Preferences -> Raspberry Pi Configuration -> Interfaces -> SSH: enable
+- To setup camera module in RPI:•	Refer to installation instruction from https://elinux.org/RPi-Cam-Web-Interface to setup the camera. 
