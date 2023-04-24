@@ -76,4 +76,4 @@ WantedBy=multi-user.target
   - storeImage() -> Captures image by initializing camera object and stores into the firebase
   - brightness() -> Uses the image clicked by the camera and gets the brightness. This is done to check if the lights are turned on or off in a particular location.
   - storeSensorReadings() -> This function uses another function from module humidity.py called getSensorReadings() to get the temperature and humidity of the           sensor. It checks if the temperature is in a particular range(18-30) if not it sends out an email notification informing about the abnormalities using another function called sendStaus from module sendEmail.py. After we get all the required information this information is stored in firebase as well as local database on the webserver. To store data on webserver, storeOnWebserver() function is used to transfer the data using an API.
-  - storeOnWebserver() -> sends data to the webserver using an API
+  - storeOnWebserver() -> sends data to the webserver using an API.
