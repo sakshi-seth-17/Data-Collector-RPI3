@@ -59,7 +59,7 @@ def storeOnWebserver(data):
 
     #print(type(data_str))
     # Send the JSON string to the API endpoint
-    response = requests.post('http://aspendb.uga.edu/firebase/getdata', json=data_str)
+    response = requests.post('http://aspendb.uga.edu/database/storedata', json=data_str)
 
 
     
