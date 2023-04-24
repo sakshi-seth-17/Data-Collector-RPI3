@@ -13,9 +13,9 @@ This application is built using Python to store observations from the sensor lik
 - Add the entry of the rpidescription in the Firebase Database -> RPI-details -> add new instance of the RPI and add field parameters with required information. Example: IPAddress: 172.21.197.141
          collection: blackbox
          location: growth room #1 (Middle)
-         password: 12345
+         password: gafst1234
          type: rpi3
-         username: sakshi-seth
+         username: wendy-king
 - Create another entry of the RPI in the Firebase Database -> CollectionName(same as used in the above data)
 - Create another entry of the RPI in the Storage to store images
 - Create a database table in Data-Store.db on webserver for the respective RPI on webserver@128.192.158.63 path: /var/www/aspendb/probesearch/SensorsData
