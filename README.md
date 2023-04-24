@@ -1,4 +1,4 @@
-                                                            # Data-Collector-RPI3
+                                                    # Data-Collector-RPI3
                                                             
 This application is built using Python to store observations from the sensor like temperature, humidity, thermal, brightness, and images into firebase as well as the local database tables.
 
@@ -66,6 +66,19 @@ WantedBy=multi-user.target
 `sudo systemctl daemon-reload` \
 `sudo systemctl start datacollector.service` \
 `sudo systemctl status datacollector.service` \
+
+---
+### Folder Structure
+	- venv/
+	- app.py
+	- config.json (Not on github, need to ask for this file from lab members)
+	- error.log
+	- humidity.py
+	- sendEmail.py
+	- userdefined.py
+	- db-key.json (Not on github, need to ask for this file from lab members)
+	- requirement.txt
+	
 
 ---
 ### Application Code Flow - app.py
