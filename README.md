@@ -42,7 +42,7 @@ This application is built using Python to store observations from the sensor lik
 `sudo nano /lib/systemd/system/datacollector.service` \
 Paste below lines inside the file by making necessary changes \
 [Unit] \
-Description=rpi0 \
+Description=rpi3 \
 After=multi-user.target 
 
 
