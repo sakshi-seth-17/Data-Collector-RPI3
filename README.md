@@ -33,10 +33,10 @@ This application is built using Python to store observations from the sensor lik
 2. Make neccessary changes required in the app.py wrt specific RPI. \
 
 3. Travel to the parent project directory and install the required python packages. \
-`Create virtual environment – python3 -m venv venv` \
+Create virtual environment – `python3 -m venv venv` \
 `source venv/bin/activate` \
 `pip3 install -r requirement.txt` \
-`To check if application is working fine run – python3 app.py` \
+To check if application is working fine run – `python3 app.py` \
 
 ### Create service file to make the app run indefinitely
 `sudo nano /lib/systemd/system/datacollector.service` \
