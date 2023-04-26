@@ -15,8 +15,4 @@ def getSensorReadings():
             return result
         else:
             DHT_READ_TIMEOUT
-            #result["temperature"] = 0
-            #result["humidity"] = 0
-            
-        #return result
         
